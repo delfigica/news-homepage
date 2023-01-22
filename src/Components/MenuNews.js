@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 
 export const MenuNews = () => {
   const news = [
@@ -21,14 +21,28 @@ export const MenuNews = () => {
         "Private funding by VC firms is down 50% YOY. We take a look at what that means.",
     },
   ];
+
+  const theme = useTheme();
+
+  const laptop = useMediaQuery(theme.breakpoints.up("lg"));
+
   return (
     <Box
-      sx={{
-        marginLeft: "50px",
-        backgroundColor: "hsl(240, 100%, 5%)",
-        width: "25%",
-        padding: "1.5em",
-      }}
+      sx={
+        laptop
+          ? {
+              marginLeft: "50px",
+              backgroundColor: "hsl(240, 100%, 5%)",
+              width: "25%",
+              padding: "1.5em",
+            }
+          : {
+              backgroundColor: "hsl(240, 100%, 5%)",
+              padding: "1.5em",
+              width: "90%",
+              margin: "25px auto",
+            }
+      }
     >
       <Typography
         sx={{ fontSize: "2.5em", fontWeight: 800, color: "hsl(35, 77%, 62%)" }}

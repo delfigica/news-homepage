@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 
 import gaming from "../assets/image-gaming-growth.jpg";
 import retro from "../assets/image-retro-pcs.jpg";
@@ -26,40 +26,94 @@ export const ListNews = () => {
       image: gaming,
     },
   ];
+
+  const theme = useTheme();
+
+  const laptop = useMediaQuery(theme.breakpoints.up("lg"));
   return (
-    <Box sx={{ display: "flex", margin: "50px auto", width: "80%" }}>
+    <Box
+      sx={
+        laptop
+          ? { display: "flex", margin: "50px auto", width: "80%" }
+          : { margin: "15px" }
+      }
+    >
       {news.map((n) => (
-        <Box key={n.id} sx={{ display: "flex" }}>
-          <Box sx={{ width: "100px" }}>
+        <Box
+          key={n.id}
+          sx={
+            laptop
+              ? { display: "flex" }
+              : { margin: "20px 0px", display: "flex" }
+          }
+        >
+          <Box
+            sx={
+              laptop
+                ? { width: "100px" }
+                : { width: "150px", margin: "0px 10px" }
+            }
+          >
             <img src={n.image} />
           </Box>
-          <Box sx={{ margin: "0px 15px" }}>
+          <Box sx={laptop ? { margin: "0px 15px" } : {}}>
             <Typography
-              sx={{
-                fontSize: "2em",
-                color: "hsl(233, 8%, 79%)",
-                fontWeight: 800,
-              }}
+              sx={
+                laptop
+                  ? {
+                      fontSize: "2em",
+                      color: "hsl(233, 8%, 79%)",
+                      fontWeight: 800,
+                    }
+                  : {
+                      fontSize: "1.5em",
+                      color: "hsl(233, 8%, 79%)",
+                      fontWeight: 800,
+                    }
+              }
             >
               {n.id}
             </Typography>
             <Typography
               color="secondary"
-              sx={{
-                fontWeight: 800,
-                fontSize: "1.2em",
-                "&:hover": { color: "hsl(5, 85%, 63%)", cursor: "pointer" },
-              }}
+              sx={
+                laptop
+                  ? {
+                      fontWeight: 800,
+                      fontSize: "1.2em",
+                      "&:hover": {
+                        color: "hsl(5, 85%, 63%)",
+                        cursor: "pointer",
+                      },
+                    }
+                  : {
+                      fontWeight: 800,
+                      fontSize: "1em",
+                      "&:hover": {
+                        color: "hsl(5, 85%, 63%)",
+                        cursor: "pointer",
+                      },
+                    }
+              }
             >
               {n.title}
             </Typography>
             <Typography
-              sx={{
-                color: "hsl(236, 13%, 42%)",
-                fontWeight: 400,
-                width: "240px",
-                margin: "10px 0px",
-              }}
+              sx={
+                laptop
+                  ? {
+                      color: "hsl(236, 13%, 42%)",
+                      fontWeight: 400,
+                      width: "240px",
+                      margin: "10px 0px",
+                    }
+                  : {
+                      width: "150px",
+                      color: "hsl(236, 13%, 42%)",
+                      fontWeight: 400,
+                      fontSize: "1em",
+                    }
+              }
             >
               {n.description}
             </Typography>
